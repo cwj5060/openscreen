@@ -39,7 +39,7 @@ export function LaunchWindow() {
     const s = (seconds % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
-  const [selectedSource, setSelectedSource] = useState("Screen");
+  const [selectedSource, setSelectedSource] = useState("屏幕");
   const [hasSelectedSource, setHasSelectedSource] = useState(false);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function LaunchWindow() {
           setSelectedSource(source.name);
           setHasSelectedSource(true);
         } else {
-          setSelectedSource("Screen");
+          setSelectedSource("屏幕");
           setHasSelectedSource(false);
         }
       }
@@ -137,7 +137,7 @@ export function LaunchWindow() {
           ) : (
             <>
               <BsRecordCircle size={14} className={hasSelectedSource ? "text-white" : "text-white/50"} />
-              <span className={hasSelectedSource ? "text-white" : "text-white/50"}>Record</span>
+              <span className={hasSelectedSource ? "text-white" : "text-white/50"}>录制</span>
             </>
           )}
         </Button>
@@ -154,7 +154,7 @@ export function LaunchWindow() {
           disabled={recording}
         >
           <FaFolderMinus size={14} className="text-white" />
-          <span className={styles.folderText}>Open</span>
+          <span className={styles.folderText}>打开</span>
         </Button>
 
          {/* Separator before hide/close buttons */}
@@ -163,7 +163,7 @@ export function LaunchWindow() {
           variant="link"
           size="icon"
           className={`ml-2 ${styles.electronNoDrag} hudOverlayButton`}
-          title="Hide HUD"
+          title="隐藏 HUD"
           onClick={sendHudOverlayHide}
         >
           <FiMinus size={18} style={{ color: '#fff', opacity: 0.7 }} />
@@ -174,7 +174,7 @@ export function LaunchWindow() {
           variant="link"
           size="icon"
           className={`ml-1 ${styles.electronNoDrag} hudOverlayButton`}
-          title="Close App"
+          title="关闭应用"
           onClick={sendHudOverlayClose}
         >
           <FiX size={18} style={{ color: '#fff', opacity: 0.7 }} />

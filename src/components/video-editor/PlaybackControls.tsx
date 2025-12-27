@@ -41,7 +41,7 @@ export default function PlaybackControls({
             ? "bg-white/10 text-white hover:bg-white/20" 
             : "bg-white text-black hover:bg-white/90 hover:scale-105 shadow-[0_0_15px_rgba(255,255,255,0.3)]"
         )}
-        aria-label={isPlaying ? 'Pause' : 'Play'}
+        aria-label={isPlaying ? '暂停' : '播放'}
       >
         {isPlaying ? (
           <Pause className="w-3.5 h-3.5 fill-current" />

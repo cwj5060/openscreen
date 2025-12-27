@@ -113,7 +113,7 @@ export class VideoExporter {
       // Get the video element for frame extraction
       const videoElement = this.decoder.getVideoElement();
       if (!videoElement) {
-        throw new Error('Video element not available');
+        throw new Error('视频元素不可用');
       }
 
       // Calculate effective duration and frame count (excluding trim regions)
@@ -210,7 +210,7 @@ export class VideoExporter {
       }
 
       if (this.cancelled) {
-        return { success: false, error: 'Export cancelled' };
+        return { success: false, error: '导出已取消' };
       }
 
       // Finalize encoding
@@ -326,7 +326,7 @@ export class VideoExporter {
       
       const softwareSupport = await VideoEncoder.isConfigSupported(encoderConfig);
       if (!softwareSupport.supported) {
-        throw new Error('Video encoding not supported on this system');
+        throw new Error('此系统不支持视频编码');
       }
       
       this.encoder.configure(encoderConfig);
