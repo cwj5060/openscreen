@@ -81,12 +81,12 @@ export default function Item({
           <div
             className={cn(glassStyles.zoomEndCap, glassStyles.left)}
             style={{ cursor: 'col-resize', pointerEvents: 'auto', width: 8, opacity: 0.9, background: endCapColor }}
-            title="Resize left"
+            title="向左调整大小"
           />
           <div
             className={cn(glassStyles.zoomEndCap, glassStyles.right)}
             style={{ cursor: 'col-resize', pointerEvents: 'auto', width: 8, opacity: 0.9, background: endCapColor }}
-            title="Resize right"
+            title="向右调整大小"
           />
           {/* Content */}
           <div className="relative z-10 flex items-center gap-1.5 text-white/90 opacity-80 group-hover:opacity-100 transition-opacity select-none">
@@ -101,7 +101,7 @@ export default function Item({
               <>
                 <Scissors className="w-3.5 h-3.5" />
                 <span className="text-[11px] font-semibold tracking-tight">
-                  Trim
+                  裁剪
                 </span>
               </>
             ) : (

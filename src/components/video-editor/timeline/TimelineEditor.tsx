@@ -657,8 +657,8 @@ export default function TimelineEditor({
     // Check if playhead is inside any zoom region
     const isOverlapping = sorted.some(region => startPos >= region.startMs && startPos < region.endMs);
     if (isOverlapping || gapToNext <= 0) {
-      toast.error("Cannot place zoom here", {
-        description: "Zoom already exists at this location or not enough space available.",
+      toast.error("无法在此处添加缩放", {
+        description: "此处已存在缩放或空间不足。",
       });
       return;
     }
@@ -687,8 +687,8 @@ export default function TimelineEditor({
     // Check if playhead is inside any trim region
     const isOverlapping = sorted.some(region => startPos >= region.startMs && startPos < region.endMs);
     if (isOverlapping || gapToNext <= 0) {
-      toast.error("Cannot place trim here", {
-        description: "Trim already exists at this location or not enough space available.",
+      toast.error("无法在此处添加裁剪", {
+        description: "此处已存在裁剪或空间不足。",
       });
       return;
     }
@@ -787,7 +787,7 @@ export default function TimelineEditor({
       id: region.id,
       rowId: ZOOM_ROW_ID,
       span: { start: region.startMs, end: region.endMs },
-      label: `Zoom ${index + 1}`,
+      label: `缩放 ${index + 1}`,
       zoomDepth: region.depth,
       variant: 'zoom',
     }));
@@ -796,7 +796,7 @@ export default function TimelineEditor({
       id: region.id,
       rowId: TRIM_ROW_ID,
       span: { start: region.startMs, end: region.endMs },
-      label: `Trim ${index + 1}`,
+      label: `裁剪 ${index + 1}`,
       variant: 'trim',
     }));
 
@@ -805,12 +805,12 @@ export default function TimelineEditor({
       
       if (region.type === 'text') {
         // Show text preview
-        const preview = region.content.trim() || 'Empty text';
+        const preview = region.content.trim() || '空文本';
         label = preview.length > 20 ? `${preview.substring(0, 20)}...` : preview;
       } else if (region.type === 'image') {
-        label = 'Image';
+        label = '图片';
       } else {
-        label = 'Annotation';
+        label = '注释';
       }
       
       return {
@@ -843,8 +843,8 @@ export default function TimelineEditor({
           <Plus className="w-6 h-6 text-slate-600" />
         </div>
         <div className="text-center">
-          <p className="text-sm font-medium text-slate-300">No Video Loaded</p>
-          <p className="text-xs text-slate-500 mt-1">Drag and drop a video to start editing</p>
+          <p className="text-sm font-medium text-slate-300">未加载视频</p>
+          <p className="text-xs text-slate-500 mt-1">拖放视频开始编辑</p>
         </div>
       </div>
     );
@@ -859,7 +859,7 @@ export default function TimelineEditor({
             variant="ghost"
             size="icon"
             className="h-7 w-7 text-slate-400 hover:text-[#34B27B] hover:bg-[#34B27B]/10 transition-all"
-            title="Add Zoom (Z)"
+            title="添加缩放 (Z)"
           >
             <ZoomIn className="w-4 h-4" />
           </Button>
@@ -868,7 +868,7 @@ export default function TimelineEditor({
             variant="ghost"
             size="icon"
             className="h-7 w-7 text-slate-400 hover:text-[#ef4444] hover:bg-[#ef4444]/10 transition-all"
-            title="Add Trim (T)"
+            title="添加裁剪 (T)"
           >
             <Scissors className="w-4 h-4" />
           </Button>
@@ -877,7 +877,7 @@ export default function TimelineEditor({
             variant="ghost"
             size="icon"
             className="h-7 w-7 text-slate-400 hover:text-[#B4A046] hover:bg-[#B4A046]/10 transition-all"
-            title="Add Annotation (A)"
+            title="添加注释 (A)"
           >
             <MessageSquare className="w-4 h-4" />
           </Button>
@@ -912,11 +912,11 @@ export default function TimelineEditor({
         <div className="flex items-center gap-4 text-[10px] text-slate-500 font-medium">
           <span className="flex items-center gap-1.5">
             <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[#34B27B] font-sans">{shortcuts.pan}</kbd>
-            <span>Pan</span>
+            <span>平移</span>
           </span>
           <span className="flex items-center gap-1.5">
             <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[#34B27B] font-sans">{shortcuts.zoom}</kbd>            
-            <span>Zoom</span>
+            <span>缩放</span>
           </span>
         </div>
       </div>

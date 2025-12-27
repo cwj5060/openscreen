@@ -94,10 +94,10 @@ export default function VideoEditor() {
           const videoUrl = toFileUrl(result.path);
           setVideoPath(videoUrl);
         } else {
-          setError('No video to load. Please record or select a video.');
+          setError('没有可加载的视频。请录制或选择一个视频。');
         }
       } catch (err) {
-        setError('Error loading video: ' + String(err));
+        setError('加载视频出错：' + String(err));
       } finally {
         setLoading(false);
       }
@@ -267,7 +267,7 @@ export default function VideoEditor() {
       startMs: Math.round(span.start),
       endMs: Math.round(span.end),
       type: 'text',
-      content: 'Enter text...',
+      content: '输入你的文本...',
       position: { ...DEFAULT_ANNOTATION_POSITION },
       size: { ...DEFAULT_ANNOTATION_SIZE },
       style: { ...DEFAULT_ANNOTATION_STYLE },
@@ -327,7 +327,7 @@ export default function VideoEditor() {
         
         // Restore content from type-specific storage
         if (type === 'text') {
-          updatedRegion.content = region.textContent || 'Enter text...';
+          updatedRegion.content = region.textContent || '输入你的文本...';
         } else if (type === 'image') {
           updatedRegion.content = region.imageContent || '';
         } else if (type === 'figure') {
@@ -436,13 +436,13 @@ export default function VideoEditor() {
 
   const handleExport = useCallback(async () => {
     if (!videoPath) {
-      toast.error('No video loaded');
+      toast.error('未加载视频');
       return;
     }
 
     const video = videoPlaybackRef.current?.video;
     if (!video) {
-      toast.error('Video not ready');
+      toast.error('视频尚未准备好');
       return;
     }
 
@@ -460,7 +460,7 @@ export default function VideoEditor() {
       // Get actual video dimensions to match recording resolution
       const video = videoPlaybackRef.current?.video;
       if (!video) {
-        toast.error('Video not ready');
+        toast.error('视频尚未准备好');
         return;
       }
       
@@ -590,16 +590,16 @@ export default function VideoEditor() {
         const saveResult = await window.electronAPI.saveExportedVideo(arrayBuffer, fileName);
         
         if (saveResult.cancelled) {
-          toast.info('Export cancelled');
+          toast.info('导出已取消');
         } else if (saveResult.success) {
-          toast.success(`Video exported successfully to ${saveResult.path}`);
+          toast.success(`视频已成功导出到 ${saveResult.path}`);
         } else {
-          setExportError(saveResult.message || 'Failed to save video');
-          toast.error(saveResult.message || 'Failed to save video');
+          setExportError(saveResult.message || '保存视频失败');
+          toast.error(saveResult.message || '保存视频失败');
         }
       } else {
-        setExportError(result.error || 'Export failed');
-        toast.error(result.error || 'Export failed');
+        setExportError(result.error || '导出失败');
+        toast.error(result.error || '导出失败');
       }
 
       if (wasPlaying) {
@@ -609,7 +609,7 @@ export default function VideoEditor() {
       console.error('Export error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       setExportError(errorMessage);
-      toast.error(`Export failed: ${errorMessage}`);
+      toast.error(`导出失败：${errorMessage}`);
     } finally {
       setIsExporting(false);
       exporterRef.current = null;
@@ -619,7 +619,7 @@ export default function VideoEditor() {
   const handleCancelExport = useCallback(() => {
     if (exporterRef.current) {
       exporterRef.current.cancel();
-      toast.info('Export cancelled');
+      toast.info('导出已取消');
       setShowExportDialog(false);
       setIsExporting(false);
       setExportProgress(null);
@@ -630,7 +630,7 @@ export default function VideoEditor() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-background">
-        <div className="text-foreground">Loading video...</div>
+        <div className="text-foreground">正在加载视频...</div>
       </div>
     );
   }

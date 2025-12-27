@@ -879,7 +879,7 @@ const VideoPlayback = forwardRef<VideoPlaybackRef, VideoPlaybackProps>(({
         onDurationChange={e => {
           onDurationChange(e.currentTarget.duration);
         }}
-        onError={() => onError('Failed to load video')}
+        onError={() => onError('加载视频失败')}
       />
     </div>
   );

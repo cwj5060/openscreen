@@ -83,7 +83,7 @@ export function useScreenRecorder(): UseScreenRecorderReturn {
     try {
       const selectedSource = await window.electronAPI.getSelectedSource();
       if (!selectedSource) {
-        alert("Please select a source to record");
+        alert("请选择要录制的来源");
         return;
       }
 

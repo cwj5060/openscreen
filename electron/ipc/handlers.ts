@@ -64,13 +64,13 @@ export function registerIpcHandlers(
       return {
         success: true,
         path: videoPath,
-        message: 'Video stored successfully'
+        message: '视频保存成功'
       }
     } catch (error) {
       console.error('Failed to store video:', error)
       return {
         success: false,
-        message: 'Failed to store video',
+        message: '保存视频失败',
         error: String(error)
       }
     }
@@ -84,7 +84,7 @@ export function registerIpcHandlers(
       const videoFiles = files.filter(file => file.endsWith('.webm'))
       
       if (videoFiles.length === 0) {
-        return { success: false, message: 'No recorded video found' }
+        return { success: false, message: '未找到录制视频' }
       }
       
       const latestVideo = videoFiles.sort().reverse()[0]
@@ -93,12 +93,12 @@ export function registerIpcHandlers(
       return { success: true, path: videoPath }
     } catch (error) {
       console.error('Failed to get video path:', error)
-      return { success: false, message: 'Failed to get video path', error: String(error) }
+      return { success: false, message: '获取视频路径失败', error: String(error) }
     }
   })
 
   ipcMain.handle('set-recording-state', (_, recording: boolean) => {
-    const source = selectedSource || { name: 'Screen' }
+    const source = selectedSource || { name: '屏幕' }
     if (onRecordingStateChange) {
       onRecordingStateChange(recording, source.name)
     }
@@ -131,10 +131,10 @@ export function registerIpcHandlers(
   ipcMain.handle('save-exported-video', async (_, videoData: ArrayBuffer, fileName: string) => {
     try {
       const result = await dialog.showSaveDialog({
-        title: 'Save Exported Video',
+        title: '保存导出视频',
         defaultPath: path.join(app.getPath('downloads'), fileName),
         filters: [
-          { name: 'MP4 Video', extensions: ['mp4'] }
+          { name: 'MP4 视频', extensions: ['mp4'] }
         ],
         properties: ['createDirectory', 'showOverwriteConfirmation']
       });
@@ -143,7 +143,7 @@ export function registerIpcHandlers(
         return {
           success: false,
           cancelled: true,
-          message: 'Export cancelled'
+          message: '导出已取消'
         };
       }
       await fs.writeFile(result.filePath, Buffer.from(videoData));
@@ -151,13 +151,13 @@ export function registerIpcHandlers(
       return {
         success: true,
         path: result.filePath,
-        message: 'Video exported successfully'
+        message: '视频导出成功'
       };
     } catch (error) {
       console.error('Failed to save exported video:', error)
       return {
         success: false,
-        message: 'Failed to save exported video',
+        message: '保存导出视频失败',
         error: String(error)
       }
     }
@@ -166,11 +166,11 @@ export function registerIpcHandlers(
   ipcMain.handle('open-video-file-picker', async () => {
     try {
       const result = await dialog.showOpenDialog({
-        title: 'Select Video File',
+        title: '选择视频文件',
         defaultPath: RECORDINGS_DIR,
         filters: [
-          { name: 'Video Files', extensions: ['webm', 'mp4', 'mov', 'avi', 'mkv'] },
-          { name: 'All Files', extensions: ['*'] }
+          { name: '视频文件', extensions: ['webm', 'mp4', 'mov', 'avi', 'mkv'] },
+          { name: '所有文件', extensions: ['*'] }
         ],
         properties: ['openFile']
       });
@@ -187,7 +187,7 @@ export function registerIpcHandlers(
       console.error('Failed to open file picker:', error);
       return {
         success: false,
-        message: 'Failed to open file picker',
+        message: '打开文件选择器失败',
         error: String(error)
       };
     }

@@ -69,11 +69,11 @@ function getTrayIcon(filename: string) {
 function updateTrayMenu(recording: boolean = false) {
   if (!tray) return;
   const trayIcon = recording ? recordingTrayIcon : defaultTrayIcon;
-  const trayToolTip = recording ? `Recording: ${selectedSourceName}` : "OpenScreen";
+  const trayToolTip = recording ? `录制中：${selectedSourceName}` : "OpenScreen";
   const menuTemplate = recording
     ? [
         {
-          label: "Stop Recording",
+          label: "停止录制",
           click: () => {
             if (mainWindow && !mainWindow.isDestroyed()) {
               mainWindow.webContents.send("stop-recording-from-tray");
@@ -83,7 +83,7 @@ function updateTrayMenu(recording: boolean = false) {
       ]
     : [
         {
-          label: "Open",
+          label: "打开",
           click: () => {
             if (mainWindow && !mainWindow.isDestroyed()) {
               mainWindow.isMinimized() && mainWindow.restore();
@@ -93,7 +93,7 @@ function updateTrayMenu(recording: boolean = false) {
           },
         },
         {
-          label: "Quit",
+          label: "退出",
           click: () => {
             app.quit();
           },
